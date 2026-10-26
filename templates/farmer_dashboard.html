@@ -1,0 +1,131 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+   <div>
+       <h2 class="mb-1">Dashboard Summary</h2>
+       <p class="text-muted mb-0">Overview of your current farming performance</p>
+   </div>
+   <a href="{% url 'crop_create' %}" class="btn btn-success">
+       Add New Crop
+   </a>
+</div>
+
+
+<div class="row g-3 mb-4">
+   <div class="col-md-4">
+       <div class="card p-3 h-100">
+           <div class="d-flex justify-content-between align-items-center mb-2">
+               <span class="summary-icon">🌾</span>
+               <span class="badge bg-success-subtle text-success">Active</span>
+           </div>
+           <h6 class="text-muted">Active Crops</h6>
+           <p class="display-6 mb-0">{{ active_crops_count }}</p>
+       </div>
+   </div>
+
+
+   <div class="col-md-4">
+       <div class="card p-3 h-100">
+           <div class="d-flex justify-content-between align-items-center mb-2">
+               <span class="summary-icon">📐</span>
+               <span class="badge bg-primary-subtle text-primary">Area</span>
+           </div>
+           <h6 class="text-muted">Total Land (Acres)</h6>
+           <p class="display-6 mb-0">{{ total_acres }}</p>
+       </div>
+   </div>
+
+
+   <div class="col-md-4">
+       <div class="card p-3 h-100">
+           <div class="d-flex justify-content-between align-items-center mb-2">
+               <span class="summary-icon">💰</span>
+               <span class="badge bg-warning-subtle text-warning">Spent</span>
+           </div>
+           <h6 class="text-muted">Total Investment</h6>
+           <p class="display-6 mb-0">₹{{ total_investment }}</p>
+       </div>
+   </div>
+
+
+   <div class="col-md-4">
+       <div class="card p-3 h-100">
+           <div class="d-flex justify-content-between align-items-center mb-2">
+               <span class="summary-icon">📦</span>
+               <span class="badge bg-info-subtle text-info">Income</span>
+           </div>
+           <h6 class="text-muted">Total Sales</h6>
+           <p class="display-6 mb-0">₹{{ total_sales }}</p>
+       </div>
+   </div>
+
+
+   <div class="col-md-4">
+       <div class="card p-3 h-100">
+           <div class="d-flex justify-content-between align-items-center mb-2">
+               <span class="summary-icon">📈</span>
+               <span class="badge bg-secondary-subtle text-secondary">Result</span>
+           </div>
+           <h6 class="text-muted">Net Profit/Loss</h6>
+           <p class="display-6 mb-0">₹{{ total_profit }}</p>
+       </div>
+   </div>
+</div>
+
+
+<div class="card p-3">
+   <div class="d-flex justify-content-between align-items-center mb-3">
+       <h3 class="mb-0">Recent Crops</h3>
+   </div>
+
+
+   <table class="table table-striped table-hover align-middle mb-0">
+       <thead class="table-light">
+           <tr>
+               <th>Crop</th>
+               <th>Variety</th>
+               <th>Acres</th>
+               <th>Status</th>
+               <th>Action</th>
+           </tr>
+       </thead>
+
+
+       <tbody>
+           {% for crop in recent_crops %}
+           <tr>
+               <td>{{ crop.name }}</td>
+               <td>{{ crop.variety }}</td>
+               <td>{{ crop.acres }}</td>
+               <td>
+                   <span class="badge bg-light text-dark">
+                       {{ crop.status }}
+                   </span>
+               </td>
+               <td>
+                   <a href="{% url 'crop_detail' crop.pk %}"
+                      class="btn btn-sm btn-outline-primary">
+                       View
+                   </a>
+               </td>
+           </tr>
+           {% empty %}
+           <tr>
+               <td colspan="5" class="text-center">
+                   No crops added yet.
+               </td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+</div>
+
+
+{% endblock %}
+

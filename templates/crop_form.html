@@ -1,0 +1,95 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card p-4 mt-4">
+    <h2 class="mb-4">{{ title }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Crop Name</label>
+                <input type="text" name="name" class="form-control"
+                       value="{{ crop.name|default:'' }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Variety</label>
+                <input type="text" name="variety" class="form-control"
+                       value="{{ crop.variety|default:'' }}">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Acres</label>
+                <input type="number" step="0.01" name="acres"
+                       class="form-control"
+                       value="{{ crop.acres|default:'' }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Season</label>
+                <input type="text" name="season" class="form-control"
+                       value="{{ crop.season|default:'' }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Start Date</label>
+                <input type="date" name="start_date" class="form-control"
+                       value="{{ crop.start_date|date:'Y-m-d'|default:'' }}"
+                       required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Harvested Quantity</label>
+                <input type="number" step="0.01" name="harvested_quantity"
+                       class="form-control"
+                       value="{{ crop.harvested_quantity|default:'0' }}">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Actual Harvest Date</label>
+                <input type="date" name="actual_harvest_date"
+                       class="form-control"
+                       value="{{ crop.actual_harvest_date|date:'Y-m-d'|default:'' }}">
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select">
+                    <option value="Planned"
+                        {% if crop.status == "Planned" %}selected{% endif %}>
+                        Planned
+                    </option>
+                    <option value="Growing"
+                        {% if crop.status == "Growing" %}selected{% endif %}>
+                        Growing
+                    </option>
+                    <option value="Harvested"
+                        {% if crop.status == "Harvested" %}selected{% endif %}>
+                        Harvested
+                    </option>
+                    <option value="Failed"
+                        {% if crop.status == "Failed" %}selected{% endif %}>
+                        Failed
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Notes</label>
+                <textarea name="notes" class="form-control"
+                          rows="3">{{ crop.notes|default:'' }}</textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-4">
+            Save Crop
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+

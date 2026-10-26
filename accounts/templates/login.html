@@ -1,0 +1,443 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login | AgriManage</title>
+
+
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+         rel="stylesheet">
+
+
+   <style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+
+       body {
+           font-family: 'Poppins', sans-serif;
+           min-height: 100vh;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           padding: 25px;
+           background: linear-gradient(135deg, #e8f5e9, #f5f8ed);
+       }
+
+
+       .login-container {
+           width: 100%;
+           max-width: 1000px;
+           min-height: 580px;
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           background: #ffffff;
+           border-radius: 22px;
+           overflow: hidden;
+           box-shadow: 0 20px 60px rgba(25, 75, 40, 0.15);
+       }
+
+
+       /* Left panel */
+       .welcome-panel {
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+           padding: 45px;
+           color: white;
+           background:
+               linear-gradient(
+                   rgba(14, 67, 35, 0.84),
+                   rgba(20, 91, 42, 0.78)
+               ),
+               url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85")
+               center / cover no-repeat;
+       }
+
+
+       .brand {
+           font-size: 25px;
+           font-weight: 700;
+           letter-spacing: 0.5px;
+       }
+
+
+       .brand span {
+           color: #b9f28b;
+       }
+
+
+       .brand-icon {
+           font-size: 30px;
+           margin-right: 8px;
+       }
+
+
+       .welcome-content h1 {
+           font-size: 40px;
+           line-height: 1.35;
+           margin-bottom: 18px;
+       }
+
+
+       .welcome-content h1 span {
+           color: #b9f28b;
+       }
+
+
+       .welcome-content p {
+           font-size: 13px;
+           line-height: 1.9;
+           color: #e0eee2;
+       }
+
+
+       .features {
+           margin-top: 28px;
+       }
+
+
+       .features p {
+           margin: 13px 0;
+           font-size: 13px;
+           color: #f0f8ef;
+       }
+
+
+       .features span {
+           color: #b9f28b;
+           margin-right: 10px;
+       }
+
+
+       .copyright {
+           color: #d2e4d5;
+           font-size: 11px;
+       }
+
+
+       /* Right panel */
+       .form-panel {
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           padding: 50px;
+       }
+
+
+       .form-panel h2 {
+           color: #203d29;
+           font-size: 29px;
+           font-weight: 700;
+           margin-bottom: 8px;
+       }
+
+
+       .subtitle {
+           font-size: 13px;
+           color: #849087;
+           margin-bottom: 32px;
+       }
+
+
+       .form-group {
+           margin-bottom: 22px;
+       }
+
+
+       .form-group label {
+           display: block;
+           font-size: 12px;
+           color: #344a39;
+           font-weight: 600;
+           margin-bottom: 9px;
+       }
+
+
+       .form-group input {
+           width: 100%;
+           padding: 14px 15px;
+           border: 1px solid #dce5dd;
+           border-radius: 10px;
+           outline: none;
+           background: #fbfdfb;
+           font-family: inherit;
+           font-size: 13px;
+           transition: 0.3s;
+       }
+
+
+       .form-group input:focus {
+           border-color: #328149;
+           background: #ffffff;
+           box-shadow: 0 0 0 3px rgba(50, 129, 73, 0.10);
+       }
+
+
+       .form-group input::placeholder {
+           color: #a4afa6;
+       }
+
+
+       .form-options {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           gap: 10px;
+           margin-bottom: 27px;
+           font-size: 11px;
+       }
+
+
+       .remember {
+           display: flex;
+           align-items: center;
+           gap: 7px;
+           color: #68776b;
+       }
+
+
+       .remember input {
+           accent-color: #287b40;
+       }
+
+
+       a {
+           color: #287b40;
+           text-decoration: none;
+           font-weight: 600;
+       }
+
+
+       a:hover {
+           color: #15572b;
+           text-decoration: underline;
+       }
+
+
+       .login-btn {
+           display: block;
+           width: 100%;
+           padding: 15px;
+           border: none;
+           border-radius: 10px;
+           background: linear-gradient(135deg, #328149, #195c30);
+           color: white;
+           font-family: inherit;
+           font-size: 14px;
+           font-weight: 600;
+           text-align: center;
+           cursor: pointer;
+           transition: 0.3s;
+           box-shadow: 0 7px 18px rgba(40, 123, 64, 0.20);
+       }
+
+
+       .login-btn:hover {
+           background: linear-gradient(135deg, #246e39, #104623);
+           box-shadow: 0 10px 22px rgba(40, 123, 64, 0.25);
+       }
+
+
+       .signup {
+           text-align: center;
+           margin-top: 25px;
+           font-size: 12px;
+           color: #7e8b81;
+       }
+
+
+       .error-message {
+           padding: 12px;
+           margin-bottom: 18px;
+           border-radius: 8px;
+           background: #fff0ee;
+           color: #b42318;
+           font-size: 12px;
+       }
+
+
+       /* Mobile responsive */
+       @media (max-width: 760px) {
+           body {
+               padding: 15px;
+           }
+
+
+           .login-container {
+               max-width: 430px;
+               grid-template-columns: 1fr;
+           }
+
+
+           .welcome-panel {
+               padding: 28px;
+               min-height: 200px;
+               gap: 25px;
+           }
+
+
+           .welcome-content h1 {
+               font-size: 28px;
+           }
+
+
+           .welcome-content p,
+           .features,
+           .copyright {
+               display: none;
+           }
+
+
+           .form-panel {
+               padding: 32px 25px;
+           }
+
+
+           .form-panel h2 {
+               font-size: 25px;
+           }
+       }
+
+
+       @media (max-width: 360px) {
+           .form-options {
+               align-items: flex-start;
+               flex-direction: column;
+           }
+       }
+   </style>
+</head>
+
+
+<body>
+
+
+   <div class="login-container">
+
+
+       <!-- Welcome Section -->
+       <div class="welcome-panel">
+
+
+           <div class="brand">
+               <span class="brand-icon">🌱</span>
+               Agri<span>Sense</span>
+           </div>
+
+
+           <div class="welcome-content">
+               <h1>Grow Smarter.<br>
+                   Farm <span>Better.</span>
+               </h1>
+
+
+               <p>
+                   Welcome to your smart AgriSense
+                   . Manage crops, monitor farm activities,
+                   and grow a greener future with technology.
+               </p>
+
+
+               <div class="features">
+                   <p><span>✦</span> Smart Crop Management</p>
+                   <p><span>✦</span> Efficient Farm Monitoring</p>
+                   <p><span>✦</span> Better Agricultural Decisions</p>
+               </div>
+           </div>
+
+
+           <div class="copyright">
+               © 2026 AgriSense | Growing a Better Future
+           </div>
+
+
+       </div>
+
+
+       <!-- Login Section -->
+       <div class="form-panel">
+
+
+           <h2>Welcome Back!</h2>
+           <p class="subtitle">
+               Sign in to continue to your farm dashboard.
+           </p>
+
+
+           {% if messages %}
+               {% for message in messages %}
+                   <div class="error-message">
+                       {{ message }}
+                   </div>
+               {% endfor %}
+           {% endif %}
+
+
+           {% if form.errors %}
+               <div class="error-message">
+                   Invalid username or password. Please try again.
+               </div>
+           {% endif %}
+
+
+           <form method="POST" action="{% url 'login' %}">
+               {% csrf_token %}
+
+
+               <div class="form-group">
+                   <label for="username">Username</label>
+                   <input
+                       type="text"
+                       id="username"
+                       name="username"
+                       placeholder="Enter your username"
+                       autocomplete="username"
+                       required>
+               </div>
+
+
+               <div class="form-group">
+                   <label for="password">Password</label>
+                   <input
+                       type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Enter your password"
+                       autocomplete="current-password"
+                       required>
+               </div>
+{% comment %}
+               <div class="form-options">
+                   <label class="remember">
+                       <input type="checkbox" name="remember_me">
+                       Remember me
+                   </label>
+
+
+                   <a href="{% url 'password_reset' %}">
+                       Forgot password?
+                   </a>
+               </div>
+{% endcomment %}
+               <button type="submit" class="login-btn">
+                   Sign In &nbsp; →
+               </button>
+           </form>
+
+           <div class="signup">
+               New to Agrisense?
+               <a href="{% url 'register' %}">Create an account</a>
+           </div>
+
+       </div>
+   </div>
+
+
+</body>
+</html>

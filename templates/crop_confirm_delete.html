@@ -1,0 +1,38 @@
+
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card p-4 mt-4 mx-auto" style="max-width: 640px;">
+
+
+   <h2 class="mb-3">Delete Crop</h2>
+
+
+   <p class="mb-4">
+       Are you sure you want to delete "{{ crop.name }}"?
+   </p>
+
+
+   <form method="post">
+       {% csrf_token %}
+
+
+       <div class="d-flex gap-2">
+           <button type="submit" class="btn btn-danger">
+               Delete
+           </button>
+
+
+           <a href="{% url 'my_crops' %}"
+              class="btn btn-outline-secondary">
+               Cancel
+           </a>
+       </div>
+   </form>
+
+
+</div>
+{% endblock %}
+

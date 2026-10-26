@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4 mt-4">
+    <h2 class="mb-4">Add Sale for {{ crop.name }}</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <p class="text-muted mb-3">Available harvested quantity: <strong>{{ remaining_quantity|default:crop.harvested_quantity }}</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Sale Date</label>
+                <input type="date" name="sale_date" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Quantity Sold</label>
+                <input type="number" step="0.01" name="quantity_sold" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Price per bag</label>
+                <input type="number" step="0.01" name="unit_price" class="form-control" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-4">Save Sale</button>
+    </form>
+</div>
+{% endblock %}
+

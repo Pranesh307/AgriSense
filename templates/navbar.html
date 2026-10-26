@@ -1,0 +1,138 @@
+<style>
+   .agrinavbar {
+       background: linear-gradient(135deg, #328149, #195c30);
+       padding: 14px 0;
+       box-shadow: 0 7px 18px rgba(40, 123, 64, 0.18);
+   }
+
+
+   .agrinavbar .navbar-brand {
+       color: #ffffff;
+       font-size: 25px;
+       font-weight: 700;
+   }
+
+
+   .agrinavbar .brand-highlight {
+       color: #b9f28b;
+   }
+
+
+   .agrinavbar .nav-link {
+       color: #f0f8ef;
+       font-size: 13px;
+       font-weight: 500;
+       margin-left: 10px;
+       padding: 10px 15px;
+       border-radius: 8px;
+       transition: 0.3s;
+   }
+
+
+   .agrinavbar .nav-link:hover,
+   .agrinavbar .nav-link.active {
+       color: #b9f28b;
+       background: rgba(255, 255, 255, 0.12);
+   }
+
+
+   .agrinavbar .logout-link {
+       color: white;
+       background: #b42318;
+       border: none;
+       cursor: pointer;
+       font-family: inherit;
+   }
+
+
+   .agrinavbar .logout-link:hover {
+       color: white;
+       background: #8f1d14;
+   }
+
+
+   .agrinavbar .navbar-toggler {
+       border-color: rgba(255, 255, 255, 0.5);
+   }
+
+
+   .agrinavbar .navbar-toggler-icon {
+       filter: brightness(0) invert(1);
+   }
+
+
+   @media (max-width: 991px) {
+       .agrinavbar .nav-link {
+           margin: 5px 0;
+       }
+   }
+</style>
+
+
+<nav class="navbar navbar-expand-lg agrinavbar">
+   <div class="container">
+
+
+       <a class="navbar-brand" href="{% url 'dashboard' %}">
+           🌱 Agri<span class="brand-highlight">Sense</span>
+       </a>
+
+
+       <button class="navbar-toggler"
+               type="button"
+               data-bs-toggle="collapse"
+               data-bs-target="#agriNavbar"
+               aria-controls="agriNavbar"
+               aria-expanded="false"
+               aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+
+
+       <div class="collapse navbar-collapse" id="agriNavbar">
+           <ul class="navbar-nav ms-auto align-items-lg-center">
+
+
+               <li class="nav-item">
+                   <a class="nav-link"
+                      href="{% url 'dashboard' %}">
+                       Dashboard
+                   </a>
+               </li>
+
+
+               <li class="nav-item">
+                   <a class="nav-link"
+                      href="{% url 'my_crops' %}">
+                       My Crops
+                   </a>
+               </li>
+
+
+               <li class="nav-item">
+                   <a class="nav-link"
+                      href="{% url 'profile' %}">
+                       Profile
+                   </a>
+               </li>
+
+
+               <li class="nav-item">
+                   <form method="post" action="{% url 'logout' %}">
+                       {% csrf_token %}
+                       <button type="submit"
+                               class="nav-link logout-link">
+                           Logout
+                       </button>
+                   </form>
+               </li>
+
+
+           </ul>
+       </div>
+
+
+   </div>
+</nav>
+
+

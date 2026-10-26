@@ -1,0 +1,414 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | AgriSense</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 18px;
+            background: linear-gradient(135deg, #e6f4e7, #f6f8ee);
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(25, 75, 40, 0.14);
+        }
+
+        /* Left welcome panel */
+        .welcome-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 45px;
+            color: #ffffff;
+            background:
+                linear-gradient(
+                    rgba(12, 61, 32, 0.85),
+                    rgba(26, 99, 44, 0.78)
+                ),
+                url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85")
+                center / cover no-repeat;
+        }
+
+        .brand {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        .brand .highlight {
+            color: #b9f28b;
+        }
+
+        .brand-icon {
+            margin-right: 8px;
+            font-size: 30px;
+        }
+
+        .welcome-content h1 {
+            font-size: 39px;
+            line-height: 1.4;
+            margin-bottom: 18px;
+        }
+
+        .welcome-content h1 span {
+            color: #b9f28b;
+        }
+
+        .welcome-content p {
+            font-size: 13px;
+            line-height: 1.9;
+            color: #e1eee2;
+        }
+
+        .benefits {
+            margin-top: 28px;
+        }
+
+        .benefits div {
+            margin: 15px 0;
+            font-size: 13px;
+            color: #eff8ef;
+        }
+
+        .benefits span {
+            color: #b9f28b;
+            margin-right: 10px;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #d2e4d5;
+        }
+
+        /* Right signup panel */
+        .form-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 42px 48px;
+        }
+
+        .form-panel h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #203d29;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #849087;
+            margin-bottom: 25px;
+        }
+
+        .messages {
+            margin-bottom: 18px;
+        }
+
+        .message {
+            padding: 11px 13px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: #fff0ee;
+            color: #b42318;
+            font-size: 12px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #344a39;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dce5dd;
+            border-radius: 10px;
+            background: #fbfdfb;
+            outline: none;
+            font-family: inherit;
+            font-size: 12px;
+            color: #263d2b;
+            transition: 0.25s;
+        }
+
+        .form-group input::placeholder {
+            color: #a4afa6;
+        }
+
+        .form-group input:focus {
+            border-color: #328149;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(50, 129, 73, 0.10);
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin: 2px 0 22px;
+            font-size: 11px;
+            line-height: 1.8;
+            color: #738075;
+        }
+
+        .terms input {
+            margin-top: 5px;
+            accent-color: #287b40;
+        }
+
+        .terms a,
+        .signin a {
+            color: #287b40;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .terms a:hover,
+        .signin a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #328149, #195c30);
+            color: white;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 7px 18px rgba(40, 123, 64, 0.18);
+        }
+
+        .signup-btn:hover {
+            background: linear-gradient(135deg, #246e39, #104623);
+            box-shadow: 0 10px 22px rgba(40, 123, 64, 0.25);
+        }
+
+        .signin {
+            text-align: center;
+            margin-top: 23px;
+            color: #7e8b81;
+            font-size: 12px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 800px) {
+            .signup-container {
+                max-width: 520px;
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-panel {
+                min-height: 220px;
+                padding: 28px;
+                gap: 25px;
+            }
+
+            .welcome-content h1 {
+                font-size: 28px;
+            }
+
+            .welcome-content p,
+            .benefits,
+            .copyright {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 32px 26px;
+            }
+
+            .form-panel h2 {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-panel {
+                padding: 28px 20px;
+            }
+
+            .form-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+
+        <!-- Welcome panel -->
+        <section class="welcome-panel">
+
+            <div class="brand">
+                <span class="brand-icon">🌱</span>
+                Agri<span class="highlight">Sense</span>
+            </div>
+
+            <div class="welcome-content">
+                <h1>Start Growing<br>
+                    <span>Smarter Today.</span>
+                </h1>
+
+                <p>
+                    Join AgriSense and take control of your agricultural
+                    journey. Manage your farming activities and build a
+                    smarter, more sustainable future.
+                </p>
+
+                <div class="benefits">
+                    <div><span>✦</span> Smart Agriculture Management</div>
+                    <div><span>✦</span> Efficient Crop Monitoring</div>
+                    <div><span>✦</span> A Better Future for Farming</div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                © 2026 AgriSense | Growing a Better Future
+            </div>
+
+        </section>
+
+        <!-- Signup form -->
+        <section class="form-panel">
+
+            <h2>Create Account</h2>
+            <p class="subtitle">
+                Register today and get started with AgriSense.
+            </p>
+
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Choose username"
+                            autocomplete="username"
+                            maxlength="150"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password1">Password</label>
+                    <input
+                        type="password"
+                        id="password1"
+                        name="password1"
+                        placeholder="Create a strong password"
+                        autocomplete="new-password"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="password2"
+                        name="password2"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required>
+                </div>
+
+                <label class="terms">
+                    <input type="checkbox" required>
+                    <span>
+                        I agree to the
+                        <a href="#">Terms of Service</a>
+                        and <a href="#">Privacy Policy</a>.
+                    </span>
+                </label>
+
+                <button type="submit" class="signup-btn">
+                    Create Account &nbsp; →
+                </button>
+            </form>
+
+            <div class="signin">
+                Already have an account?
+                <a href="{% url 'login' %}">Sign In</a>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>
+

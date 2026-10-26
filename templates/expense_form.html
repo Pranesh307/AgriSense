@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+   <div class="col-lg-7">
+       <div class="card p-4 mt-4">
+           <h2 class="mb-4">Add Expense for {{ crop.name }}</h2>
+
+
+           <form method="post">
+               {% csrf_token %}
+               <div class="row g-3">
+                   <div class="col-md-6">
+                       <label class="form-label">Expense Date</label>
+                       <input type="date" name="expense_date" class="form-control" required>
+                   </div>
+                   <div class="col-md-6">
+                       <label class="form-label">Category</label>
+                       <select name="category" class="form-select" required>
+                           <option value="seeds">Seeds</option>
+                           <option value="fertilizer">Fertilizer</option>
+                           <option value="pesticides">Pesticides</option>
+                           <option value="labour">Labour</option>
+                           <option value="tractor">Tractor/Ploughing</option>
+                           <option value="irrigation">Irrigation/Electricity</option>
+                           <option value="equipment">Equipment Rental</option>
+                           <option value="transport">Transport</option>
+                           <option value="harvesting">Harvesting</option>
+                           <option value="other">Other</option>
+                       </select>
+                   </div>
+                   <div class="col-md-6">
+                       <label class="form-label">Amount</label>
+                       <input type="number" step="0.01" name="amount" class="form-control" required>
+                   </div>
+                   <div class="col-md-6">
+                       <label class="form-label">Quantity (Optional)</label>
+                       <input type="text" name="quantity" class="form-control">
+                   </div>
+                   <div class="col-12">
+                       <label class="form-label">Description</label>
+                       <textarea name="description" class="form-control" rows="4" placeholder="Describe this expense..."></textarea>
+                   </div>
+               </div>
+
+
+               <div class="d-flex gap-2 mt-4">
+                   <button type="submit" class="btn btn-success">Save Expense</button>
+                   <a href="{% url 'crop_detail' crop.pk %}" class="btn btn-outline-secondary">Cancel</a>
+               </div>
+           </form>
+       </div>
+   </div>
+</div>
+{% endblock %}
+
