@@ -29,10 +29,15 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 import os
 
-ALLOWED_HOSTS = os.environ.get(
-    'ALLOWED_HOSTS',
-    'localhost,127.0.0.1'
-).split(',')
+ALLOWED_HOSTS = [
+    'agrisense-1-fzbk.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://agrisense-1-fzbk.onrender.com',
+]
 
 
 # Application definition
@@ -151,6 +156,4 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 LOGIN_URL = 'login'
-CSRF_TRUSTED_ORIGINS = [
-    'https://agrisense-cctl.onrender.com',
-]
+
