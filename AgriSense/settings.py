@@ -96,21 +96,26 @@ import os
 import dj_database_url
 
 if os.environ.get('DATABASE_URL'):
+    # Render: use PostgreSQL
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
-            conn_max_age=600,
+        'default': dj_database_url.parse(
+            os.environ['DATABASE_URL'],
+            conn_max_age=600
         )
     }
 else:
+    # Local computer: continue using MySQL
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'agri_sense',
-            'USER': 'root',
-            'PASSWORD': '3007',
-            'HOST': 'localhost',
-            'PORT': '3306',
+            'NAME': os.environ.get('MYSQL_DATABASE', 'agri_sense'),
+            'USER': os.environ.get('MYSQL_USER', 'root'),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD', '3007'),
+            'HOST': os.environ.get('MYSQL_HOST', 'localhost'),
+            'PORT': os.environ.get('MYSQL_PORT', '3306'),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+            },
         }
     }
 # Password validation

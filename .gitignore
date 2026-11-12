@@ -17,3 +17,4 @@ db.sqlite3
 
 # IDE settings
 .idea/
+data.json
